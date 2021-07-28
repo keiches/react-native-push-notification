@@ -279,7 +279,13 @@ public class RNPushNotificationHelper {
                     .setPriority(priority)
                     .setAutoCancel(bundle.getBoolean("autoCancel", true))
                     .setOnlyAlertOnce(bundle.getBoolean("onlyAlertOnce", false));
-            
+
+            // @site: https://ccii83.blogspot.com/2019/04/android-oreo80-badge.html
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // API 25 and higher
+                notification.setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL);
+                // notification.setChannelId(channel_id);
+            }
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { // API 24 and higher
                 // Restore showing timestamp on Android 7+
                 // Source: https://developer.android.com/reference/android/app/Notification.Builder.html#setShowWhen(boolean)
